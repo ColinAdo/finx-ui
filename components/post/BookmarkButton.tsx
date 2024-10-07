@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent } from "react";
 import { ActionIcons } from "@/components/post";
 import { Bookmark } from "lucide-react";
 import { toast } from "sonner";
