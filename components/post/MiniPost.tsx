@@ -57,7 +57,7 @@ interface Props {
 }
 
 export default function MiniPost({ post }: Props) {
-  const username = post.author.profile.username;
+  const username = post.author.username;
   const href = `/dashboard/${username}`;
 
   return (
@@ -75,7 +75,7 @@ export default function MiniPost({ post }: Props) {
             <Timestamp createdAt={post.created_at} />
             <PostOptions
               post={post}
-              userId={post.author.profile.id}
+              userId={post.author.id}
               className="hidden group-hover:inline"
             />
           </div>
