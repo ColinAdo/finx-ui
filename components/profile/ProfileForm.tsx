@@ -33,20 +33,13 @@ import {
 } from "@/redux/features/profileSlice";
 
 interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface Props {
@@ -59,12 +52,12 @@ export default function ProfileForm({ profile }: Props) {
   const form = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
     defaultValues: {
-      profile_picture: profile.profile.profile_picture || "",
-      bio: profile.profile.bio || "",
-      email: profile.profile.email || "",
-      username: profile.profile.username || "",
-      website: profile.profile.website || "",
-      gender: profile.profile.gender || "",
+      profile_picture: profile.profile_picture || "",
+      bio: profile.bio || "",
+      email: profile.email || "",
+      username: profile.username || "",
+      website: profile.website || "",
+      gender: profile.gender || "",
     },
   });
 
@@ -75,7 +68,7 @@ export default function ProfileForm({ profile }: Props) {
 
     try {
       await updateProfile({
-        userId: profile.profile.id,
+        userId: profile.id,
         email: values.email,
         username: values.username,
         profile_picture: values.profile_picture,
@@ -100,7 +93,7 @@ export default function ProfileForm({ profile }: Props) {
           </div>
         </ProfileAvatar>
         <div>
-          <p className="font-medium">{profile.profile.username}</p>
+          <p className="font-medium">{profile.username}</p>
           <ProfileAvatar profile={profile}>
             <p className="text-blue-500 text-sm font-bold cursor-pointer hover:text-white">
               Change profile photo
