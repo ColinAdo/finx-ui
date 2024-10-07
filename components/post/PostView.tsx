@@ -18,20 +18,13 @@ import {
 } from "@/components/ui/hover-card";
 
 interface User {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface PostComment {
@@ -105,9 +98,9 @@ export default function PostView({ postId, post }: Props) {
               <HoverCardTrigger asChild className="hidden md:block">
                 <Link
                   className="font-semibold text-sm"
-                  href={`/dashboard/${post.author.profile.username}`}
+                  href={`/dashboard/${post.author.username}`}
                 >
-                  {post.author.profile.username}
+                  {post.author.username}
                 </Link>
               </HoverCardTrigger>
               <PostOptions post={post} className="hidden md:block" />
@@ -116,7 +109,7 @@ export default function PostView({ postId, post }: Props) {
                 <div className="flex items-center space-x-2">
                   <UserAvatar user={post.author} className="h-14 w-14" />
                   <div>
-                    <p className="font-bold">{post.author.profile.username}</p>
+                    <p className="font-bold">{post.author.username}</p>
                     <p className="text-sm font-medium dark:text-neutral-400">
                       {data?.profile.username}
                     </p>
@@ -175,16 +168,16 @@ export default function PostView({ postId, post }: Props) {
               .slice(0, 1)
               .map((comment) => (
                 <div className="group p-3 px-3.5  flex items-start space-x-2.5">
-                  <Link href={`/dashboard/${comment.owner.profile.username}`}>
+                  <Link href={`/dashboard/${comment.owner.username}`}>
                     <UserAvatar user={comment.owner} />
                   </Link>
                   <div className="space-y-1.5">
                     <div className="flex my-1 items-center space-x-1.5 leading-none text-sm">
                       <Link
-                        href={`/dashboard/${comment.owner.profile.username}`}
+                        href={`/dashboard/${comment.owner.username}`}
                         className="font-semibold"
                       >
-                        {comment.owner.profile.username}
+                        {comment.owner.username}
                       </Link>
                       <p className="font-medium">{comment.comment}</p>
                     </div>
