@@ -17,20 +17,13 @@ import {
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
 interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface Comment {
@@ -69,7 +62,7 @@ export default function CommentOptions({ comment }: Props) {
         <MoreHorizontal className="h-5 w-5 hidden group-hover:inline cursor-pointer dark:text-neutral-400" />
       </DialogTrigger>
       <DialogContent className="dialogContent">
-        {comment.owner.profile.id === user?.id && (
+        {comment.owner.id === user?.id && (
           <form onSubmit={onSubmit} className="postOption">
             <input type="hidden" name="id" value={comment.id} />
             <SubmitButton className="text-red-500 font-bold disabled:cursor-not-allowed w-full p-3">
