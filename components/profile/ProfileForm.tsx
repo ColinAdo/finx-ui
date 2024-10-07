@@ -33,13 +33,20 @@ import {
 } from "@/redux/features/profileSlice";
 
 interface ProfileData {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface Props {
@@ -52,12 +59,12 @@ export default function ProfileForm({ profile }: Props) {
   const form = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
     defaultValues: {
-      profile_picture: profile.profile_picture || "",
-      bio: profile.bio || "",
-      email: profile.email || "",
-      username: profile.username || "",
-      website: profile.website || "",
-      gender: profile.gender || "",
+      profile_picture: profile.profile.profile_picture || "",
+      bio: profile.profile.bio || "",
+      email: profile.profile.email || "",
+      username: profile.profile.username || "",
+      website: profile.profile.website || "",
+      gender: profile.profile.gender || "",
     },
   });
 
@@ -68,7 +75,7 @@ export default function ProfileForm({ profile }: Props) {
 
     try {
       await updateProfile({
-        userId: profile.id,
+        userId: profile.profile.id,
         email: values.email,
         username: values.username,
         profile_picture: values.profile_picture,
@@ -87,14 +94,17 @@ export default function ProfileForm({ profile }: Props) {
   return (
     <div className="space-y-8 py-10 lg:p-10 max-w-xl">
       <div className="flex items-center gap-x-2 md:gap-x-5">
-        <ProfileAvatar profile={profile}>
+        <ProfileAvatar profile={profile.profile}>
           <div className="md:w-20 flex md:justify-end">
-            <UserAvatar user={profile} className="w-11 h-11 cursor-pointer" />
+            <UserAvatar
+              user={profile.profile}
+              className="w-11 h-11 cursor-pointer"
+            />
           </div>
         </ProfileAvatar>
         <div>
-          <p className="font-medium">{profile.username}</p>
-          <ProfileAvatar profile={profile}>
+          <p className="font-medium">{profile.profile.username}</p>
+          <ProfileAvatar profile={profile.profile}>
             <p className="text-blue-500 text-sm font-bold cursor-pointer hover:text-white">
               Change profile photo
             </p>
