@@ -6,20 +6,13 @@ import { UserAvatar } from "@/components/common";
 import Timestamp from "./Timestamp";
 
 interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface Comment {
