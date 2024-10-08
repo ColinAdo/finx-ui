@@ -4,20 +4,20 @@ import Image from "next/image";
 import { AvatarProps } from "@radix-ui/react-avatar";
 
 interface ProfileData {
-  // profile: {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-  // };
-  // following: any[];
-  // followers: any[];
-  // posts: any[];
-  // following_count: number;
-  // followers_count: number;
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 type Props = Partial<AvatarProps> & {

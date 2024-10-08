@@ -12,13 +12,15 @@ import {
   useRetrieveProfileQuery,
   useUpdateProfileMutation,
 } from "@/redux/features/profileSlice";
-import { useMount } from "@/hooks";
-import { FormEvent, useState } from "react";
+import { useMount, useWebSocket } from "@/hooks";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Spinner, UserAvatar } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { CameraIcon } from "lucide-react";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateProfilePicture } from "@/redux/features/authSlice";
 
 interface ProfileData {
   profile: {
@@ -41,10 +43,11 @@ interface ProfilerProps {
   profile: ProfileData;
   children: React.ReactNode;
 }
+const selectProfilePic = (state: any) => state.auth.profilePicture;
 
 export default function ProfileAvatar({ children, profile }: ProfilerProps) {
+  const dispatch = useAppDispatch();
   const [updateProfile] = useUpdateProfileMutation();
-  const { refetch } = useRetrieveProfileQuery();
   const { data } = useRetrieveUserQuery();
   const isCurrentUser = data?.id === profile?.profile.id;
 
@@ -57,23 +60,41 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   const [isUploading, setIsUploading] = useState(false);
   const { edgestore } = useEdgeStore();
   const mount = useMount();
+  const socket = useWebSocket();
+  const profilePic = useAppSelector(selectProfilePic);
+  console.log("User Object :", profilePic?.username);
 
-  if (!mount || !profile) return null;
+  if (!profile) return null;
 
-  if (!isCurrentUser)
-    return <UserAvatar user={profile} className="w-20 h-20 md:w-36 md:h-36" />;
+  if (!isCurrentUser && profilePic) {
+    return (
+      <UserAvatar user={profilePic} className="w-20 h-20 md:w-36 md:h-36" />
+    );
+  }
+
+  useEffect(() => {
+    if (socket) {
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log("onmessage: ", data);
+        if (data.type === "profile_picture_updated") {
+          toast.success("Profile picture updated in real-time");
+          setFileUrl(data.profile_picture.profile_picture);
+          dispatch(updateProfilePicture(profilePic));
+        }
+      };
+    }
+  }, [socket]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-
     if (selectedFile) {
       setFile(selectedFile);
       setIsUploading(true);
+
       const res = await edgestore.publicFiles.upload({
         file: selectedFile,
-        onProgressChange: (progress) => {
-          setProgress(progress);
-        },
+        onProgressChange: setProgress,
       });
 
       setFileUrl(res.url);
@@ -84,34 +105,34 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!fileUrl) {
-      toast.error("No file uploaded!");
-      return;
-    }
-
-    if (isUploading) {
-      toast.error("Please wait for the file to finish uploading.");
+    if (!fileUrl || isUploading) {
+      toast.error(isUploading ? "Uploading in progress" : "No file uploaded");
       return;
     }
 
     try {
       await updateProfile({
+        ...profile.profile,
         userId: profile.profile.id,
-        email: profile.profile.email,
-        username: profile.profile.username,
         profile_picture: fileUrl,
-        bio: profile.profile.bio,
-        website: profile.profile.website,
-        gender: profile.profile.gender,
       }).unwrap();
 
-      toast.success("Profile updated successfully");
-      setOpen(!open);
-      refetch();
+      toast.success("Profile updated");
+
+      // Send profile picture update through WebSocket
+      if (socket) {
+        socket.send(
+          JSON.stringify({
+            source: "update_profile_picture",
+            profile_picture: fileUrl,
+          })
+        );
+      }
+
+      setOpen(false);
       setFile(null);
     } catch (err) {
-      toast.error("Profile update failed!");
-      console.log("Update Failed:", err);
+      toast.error("Failed to update profile");
     }
   };
 

@@ -10,12 +10,10 @@ interface ProfileData {
   id: number;
   email: string;
   username: string;
+  bio: string;
   profile_picture: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+  website: string;
+  gender: string;
 }
 
 interface Props {

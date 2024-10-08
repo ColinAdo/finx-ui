@@ -1,45 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   setSocketConnected,
   setSocketDisconnected,
-  setMessage,
 } from "@/redux/features/authSlice";
 
-const useWebSocket = () => {
+const useWebSocket = (): WebSocket | null => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const socketConnected = useAppSelector((state) => state.auth.socketConnected);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    if (isAuthenticated && !socketConnected) {
-      const socket = new WebSocket("ws://localhost:8000/api/v1/chat/");
+    let ws: WebSocket | null = null;
 
-      socket.onopen = () => {
+    if (isAuthenticated && !socket) {
+      ws = new WebSocket("ws://localhost:8000/api/v1/chat/");
+      setSocket(ws);
+
+      ws.onopen = () => {
         console.log("WebSocket connected");
         dispatch(setSocketConnected());
       };
 
-      // socket.onclose = () => {
-      //   console.log("WebSocket disconnected");
-      //   dispatch(setSocketDisconnected());
-      // };
+      ws.onclose = () => {
+        console.log("WebSocket disconnected");
+        setSocket(null);
+        dispatch(setSocketDisconnected());
+      };
 
-      // socket.onerror = (error) => {
-      //   console.error("WebSocket Error: ", error);
-      // };
-
-      // socket.onmessage = (event) => {
-      //   const message = JSON.parse(event.data);
-      //   dispatch(setMessage(message));
-      // };
+      ws.onerror = (error) => {
+        console.error("WebSocket Error: ", error);
+      };
 
       return () => {
-        console.log("Cleaning up WebSocket connection");
+        setSocket(null);
         dispatch(setSocketDisconnected());
       };
     }
-  }, []);
+  }, [isAuthenticated]);
+
+  return socket;
 };
 
 export default useWebSocket;
