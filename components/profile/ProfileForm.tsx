@@ -96,7 +96,10 @@ export default function ProfileForm({ profile }: Props) {
       <div className="flex items-center gap-x-2 md:gap-x-5">
         <ProfileAvatar profile={profile}>
           <div className="md:w-20 flex md:justify-end">
-            <UserAvatar user={profile} className="w-11 h-11 cursor-pointer" />
+            <UserAvatar
+              user={profile.profile}
+              className="w-11 h-11 cursor-pointer"
+            />
           </div>
         </ProfileAvatar>
         <div>
