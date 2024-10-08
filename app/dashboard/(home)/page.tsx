@@ -3,10 +3,8 @@
 import { Suspense } from "react";
 import { Posts } from "@/components/post";
 import { PostsSkeleton } from "@/components/common/Skeletons";
-import { useWebSocket } from "@/hooks";
 
 export default function Page() {
-  useWebSocket();
   console.log("Page component rendered");
   return (
     <main className="flex w-full flex-grow">
