@@ -1,17 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface ProfileData {
+  id: number;
+  username: string;
+  email: string;
+  bio: string;
+  profile_picture: string;
+  gender: string;
+  website: string;
+  date_joined: string;
+}
+
 interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   socketConnected: boolean;
-  messages: any[];
+  messages: null;
+  profilePicture: ProfileData | null;
 }
 
 const initialState = {
   isAuthenticated: false,
   isLoading: true,
   socketConnected: false,
-  messages: [],
+  messages: null,
 } as AuthState;
 
 const authSlice = createSlice({
@@ -35,7 +47,10 @@ const authSlice = createSlice({
       state.socketConnected = false;
     },
     setMessage: (state, action) => {
-      state.messages.push(action.payload);
+      state.messages = action.payload;
+    },
+    updateProfilePicture: (state, action) => {
+      state.profilePicture = action.payload;
     },
   },
 });
@@ -47,5 +62,6 @@ export const {
   setSocketConnected,
   setSocketDisconnected,
   setMessage,
+  updateProfilePicture,
 } = authSlice.actions;
 export default authSlice.reducer;
