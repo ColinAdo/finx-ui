@@ -94,7 +94,7 @@ export default function ProfileForm({ profile }: Props) {
   return (
     <div className="space-y-8 py-10 lg:p-10 max-w-xl">
       <div className="flex items-center gap-x-2 md:gap-x-5">
-        <ProfileAvatar profile={profile.profile}>
+        <ProfileAvatar profile={profile}>
           <div className="md:w-20 flex md:justify-end">
             <UserAvatar
               user={profile.profile}
@@ -104,7 +104,7 @@ export default function ProfileForm({ profile }: Props) {
         </ProfileAvatar>
         <div>
           <p className="font-medium">{profile.profile.username}</p>
-          <ProfileAvatar profile={profile.profile}>
+          <ProfileAvatar profile={profile}>
             <p className="text-blue-500 text-sm font-bold cursor-pointer hover:text-white">
               Change profile photo
             </p>
