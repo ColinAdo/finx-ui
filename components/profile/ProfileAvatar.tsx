@@ -61,7 +61,12 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   if (!mount || !profile) return null;
 
   if (!isCurrentUser)
-    return <UserAvatar user={profile} className="w-20 h-20 md:w-36 md:h-36" />;
+    return (
+      <UserAvatar
+        user={profile.profile}
+        className="w-20 h-20 md:w-36 md:h-36"
+      />
+    );
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
