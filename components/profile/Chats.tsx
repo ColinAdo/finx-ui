@@ -25,7 +25,7 @@ export default function Messages({ recipientProfile }: Props) {
   return (
     <div className="flex justify-start items-center my-24">
       <UserAvatar
-        user={recipientProfile}
+        user={recipientProfile.profile}
         className="h-60 w-60 hidden lg:block"
       />
     </div>
