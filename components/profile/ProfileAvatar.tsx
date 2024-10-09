@@ -47,6 +47,7 @@ const selectProfilePic = (state: any) => state.auth.profilePicture;
 
 export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   const dispatch = useAppDispatch();
+  const { refetch } = useRetrieveProfileQuery();
   const [updateProfile] = useUpdateProfileMutation();
   const { data } = useRetrieveUserQuery();
   const isCurrentUser = data?.id === profile?.profile.id;
@@ -119,7 +120,6 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
 
       toast.success("Profile updated");
 
-      // Send profile picture update through WebSocket
       if (socket) {
         socket.send(
           JSON.stringify({
