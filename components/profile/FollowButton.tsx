@@ -1,7 +1,5 @@
 "use client";
 
-// import { followUser } from "@/lib/actions";
-// import SubmitButton from "./SubmitButton";
 import { SubmitButton } from "@/components/post";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
