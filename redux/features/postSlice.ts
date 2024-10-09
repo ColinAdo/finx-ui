@@ -1,20 +1,13 @@
 import { apiSlice } from "../services/apiSlice";
 
 interface User {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface Comment {

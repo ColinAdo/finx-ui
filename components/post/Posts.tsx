@@ -12,6 +12,11 @@ import { Timestamp, PostActions, Comments } from "@/components/post";
 export default function Post() {
   const { data: user } = useRetrieveProfileQuery();
   const { data: posts } = useGetPostQuery();
+  console.log("Post data:", posts);
+
+  if (!posts) {
+    return;
+  }
 
   return (
     <div>
@@ -19,13 +24,13 @@ export default function Post() {
         <div className="flex flex-col space-y-2.5">
           <div className="flex items-center justify-between px-3 sm:px-0">
             <div className="flex space-x-3 items-center">
-              <Link href={`/dashboard/${post.author.profile.username}`}>
+              <Link href={`/dashboard/${post.author.username}`}>
                 <Avatar className="relative h-6 w-6 cursor-pointer">
-                  {post.author.profile.profile_picture ? (
+                  {post.author.profile_picture ? (
                     <Image
-                      src={post.author.profile.profile_picture}
+                      src={post.author.profile_picture}
                       fill
-                      alt={`${post.author.profile.username}'s avatar`}
+                      alt={`${post.author.username}'s avatar`}
                       className="rounded-full object-cover"
                     />
                   ) : (
@@ -40,9 +45,9 @@ export default function Post() {
               </Link>
               <div className="text-sm">
                 <p className="space-x-1">
-                  <Link href={`/dashboard/${post.author.profile.username}`}>
+                  <Link href={`/dashboard/${post.author.username}`}>
                     <span className="font-semibold">
-                      {post.author.profile.username}
+                      {post.author.username}
                     </span>
                   </Link>
                   <span
@@ -59,7 +64,7 @@ export default function Post() {
                 </p>
               </div>
             </div>
-            <PostOptions post={post} userId={post.author.profile.id} />
+            <PostOptions post={post} userId={post.author.id} />
           </div>
           <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
             {post.fileUrl ? (

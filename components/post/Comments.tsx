@@ -24,20 +24,13 @@ import Image from "next/image";
 import { Avatar } from "../ui/avatar";
 
 interface User {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface Comment {
@@ -141,7 +134,7 @@ export default function Comments({
       )}
 
       {comments.slice(-1).map((comment, i) => {
-        const username = comment.owner.profile.username;
+        const username = comment.owner.username;
 
         if (!comment.owner || !comment.comment) {
           return null;

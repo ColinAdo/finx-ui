@@ -15,20 +15,13 @@ import {
 } from "@/redux/features/postSlice";
 
 interface User {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface PostComment {
@@ -80,7 +73,7 @@ export default function PostOptions({ post, className }: Props) {
 
   const { data: user } = useRetrieveUserQuery();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const isPostMine = post.author.profile.id === user?.id;
+  const isPostMine = post.author.id === user?.id;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
