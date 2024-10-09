@@ -7,7 +7,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useMount } from "@/hooks";
-// import { FollowerWithExtras } from "@/lib/definitions";
 import { usePathname, useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Follower } from "@/components/profile";
