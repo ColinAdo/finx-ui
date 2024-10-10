@@ -1,11 +1,11 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { PostActions, PostOptions } from "@/components/post";
 import { UserAvatar } from "@/components/common";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMount } from "@/hooks";
-import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 import { Comment, CommentForm } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
