@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ImagePlus, Loader2 } from "lucide-react";
+import { ImagePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormEvent, useState } from "react";
@@ -20,7 +20,6 @@ import {
 } from "@/redux/features/postSlice";
 import { useEdgeStore } from "@/lib/edgestore";
 import { toast } from "sonner";
-import Link from "next/link";
 import { Avatar } from "../ui/avatar";
 import Image from "next/image";
 import { useMount } from "@/hooks";
