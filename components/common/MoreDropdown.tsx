@@ -38,7 +38,6 @@ function MoreDropdown() {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    // Close the dropdown when the user clicks outside
     function handleOutsideClick(event: MouseEvent) {
       if (!event.target) return;
       if (ref.current && !ref.current.contains(event.target as Node)) {
