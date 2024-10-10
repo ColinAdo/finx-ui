@@ -11,20 +11,13 @@ import { ViewPost } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
 
 interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
 }
 
 interface PostComment {
@@ -78,7 +71,7 @@ export default function CommentView({ postId, post }: Props) {
   const isPostModal = pathname === `/dashboard/c/${postId}`;
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const username = post?.author.profile.username;
+  const username = post?.author.username;
   const href = `/dashboard/${username}`;
   const mount = useMount();
 
