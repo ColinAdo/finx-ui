@@ -1,6 +1,5 @@
 "use client";
 
-import { DeletePost } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { FormEvent, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
