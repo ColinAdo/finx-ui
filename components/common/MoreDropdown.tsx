@@ -27,7 +27,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 
-function MoreDropdown() {
+export default function MoreDropdown() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [logout] = useLogoutMutation();
@@ -148,5 +148,3 @@ function MoreDropdown() {
     </DropdownMenu>
   );
 }
-
-export default MoreDropdown;
