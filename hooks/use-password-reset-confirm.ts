@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { usePasswordRestConfirmMutation } from "@/redux/features/authApiSlice";
