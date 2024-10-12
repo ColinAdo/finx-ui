@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { MoreHorizontal, Settings } from "lucide-react";
-import Link from "next/link";
 import { useRetrieveUsersProfileQuery } from "@/redux/features/profileSlice";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import {
