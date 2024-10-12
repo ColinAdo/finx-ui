@@ -46,7 +46,7 @@ export default function SettingsLayout({
         orientation="vertical"
       >
         <div className="flex fixed justify-between mx-4 lg:-ml-8 ml-12 lg:-mt-14 -mt-20">
-          <UserAvatar user={profile} className="h-10 w-10" />
+          <UserAvatar user={profile.profile} className="h-10 w-10" />
           <h4 className="font-extrabold text-xl text-white ml-5">Chats</h4>
         </div>
         <TabsList className="flex flex-col items-start lg:-ml-12  ml-8 justify-start h-full bg-transparent">
