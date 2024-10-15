@@ -50,7 +50,6 @@ export default function Messages({ recipientProfile }: Props) {
 
   return (
     <div className="flex flex-col h-screen lg:ml-8 lg:-mt-12 -mt-20 ">
-      {/* Top section */}
       <div className="flex items-center fixed lg:left-auto sm:-left-10 right-11 w-96  lg:w-7/12 justify-between p-4 border-b  bg-white dark:bg-black">
         <div className="flex items-center gap-3">
           <img
@@ -62,7 +61,6 @@ export default function Messages({ recipientProfile }: Props) {
             {recipientProfile.profile.username}
           </span>
         </div>
-        {/* 3 vertical dots */}
         <button className="text-gray-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +79,6 @@ export default function Messages({ recipientProfile }: Props) {
         </button>
       </div>
 
-      {/* Scrollable message area */}
       <div className="flex-1 p-4 lg:mt-10 lg:py-12 mt-20 mb-32 lg:-mb-6 overflow-y-auto  w-full">
         {messages.map((message) => (
           <div
@@ -108,7 +105,6 @@ export default function Messages({ recipientProfile }: Props) {
         ))}
       </div>
 
-      {/* Fixed bottom input field */}
       <div className="fixed bottom-14 lg:bottom-0  w-full md:w-7/12 left-0 md:left-auto md:mr-3.5 p-4 border-t bg-white dark:bg-black z-10">
         <form className="flex items-center gap-2 w-full">
           <Input placeholder="Type a message" className="flex-1" />
