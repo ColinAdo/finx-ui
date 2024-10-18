@@ -1,4 +1,4 @@
-import { Heart, Search, Bell } from "lucide-react";
+import { Search, Bell } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { calSans } from "@/app/fonts";
