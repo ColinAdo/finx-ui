@@ -11,7 +11,6 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 import { NavLink } from "@/components/common";
-import { FaBullseye } from "react-icons/fa6";
 
 export default function Navbar() {
   const pathname = usePathname();
