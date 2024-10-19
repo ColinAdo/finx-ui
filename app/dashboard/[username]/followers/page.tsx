@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export default function FollowersPage({ params: { username } }: Props) {
+export default function Page({ params: { username } }: Props) {
   const { data } = useRetrieveUsersProfileQuery(username);
 
   const followers = data?.following;
