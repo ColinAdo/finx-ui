@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export default function ProfilePage({ params: { username } }: Props) {
+export default function Page({ params: { username } }: Props) {
   const { data: posts } = useGetUserPostQuery(username);
 
   if (!posts) {
