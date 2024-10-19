@@ -3,8 +3,8 @@
 import { UserAvatar } from "@/components/common";
 import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const tabs = [
