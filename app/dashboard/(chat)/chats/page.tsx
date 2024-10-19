@@ -3,7 +3,7 @@
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { Chats } from "@/components/profile";
 
-export default function EditProfile() {
+export default function Page() {
   const { data: profile } = useRetrieveProfileQuery();
 
   if (!profile) {
