@@ -3,7 +3,7 @@
 import { ProfileForm } from "@/components/profile";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 
-export default function EditProfile() {
+export default function Page() {
   const { data: profile } = useRetrieveProfileQuery();
 
   if (!profile) {
