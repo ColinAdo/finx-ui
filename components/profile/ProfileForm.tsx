@@ -27,6 +27,7 @@ import { ProfileAvatar } from "@/components/profile";
 import { Spinner, UserAvatar } from "@/components/common";
 import { FormEvent } from "react";
 import { UserSchema } from "@/lib/schemas";
+import { useAppSelector } from "@/redux/hooks";
 import {
   useRetrieveProfileQuery,
   useUpdateProfileMutation,
@@ -54,6 +55,7 @@ interface Props {
 }
 
 export default function ProfileForm({ profile }: Props) {
+  const profileData = useAppSelector((state) => state.auth.profilePicture);
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const { refetch } = useRetrieveProfileQuery();
   const form = useForm<z.infer<typeof UserSchema>>({
@@ -97,7 +99,7 @@ export default function ProfileForm({ profile }: Props) {
         <ProfileAvatar profile={profile}>
           <div className="md:w-20 flex md:justify-end">
             <UserAvatar
-              user={profile.profile}
+              user={profileData ? profileData : profile.profile}
               className="w-11 h-11 cursor-pointer"
             />
           </div>

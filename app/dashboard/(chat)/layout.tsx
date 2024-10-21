@@ -4,6 +4,7 @@ import { UserAvatar } from "@/components/common";
 import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -34,6 +35,7 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   const { data: profile } = useRetrieveProfileQuery();
+  const profileData = useAppSelector((state) => state.auth.profilePicture);
 
   if (!profile) {
     return;
@@ -46,7 +48,10 @@ export default function SettingsLayout({
         orientation="vertical"
       >
         <div className="flex fixed justify-between mx-4 lg:-ml-8 ml-12 lg:-mt-14 -mt-20">
-          <UserAvatar user={profile.profile} className="h-10 w-10" />
+          <UserAvatar
+            user={profileData ? profileData : profile.profile}
+            className="h-10 w-10"
+          />
           <h4 className="font-extrabold text-xl text-white ml-5">Chats</h4>
         </div>
         <TabsList className="flex flex-col items-start lg:-ml-12  ml-8 justify-start h-full bg-transparent">
