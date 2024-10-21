@@ -7,10 +7,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { Spinner } from "@/components/common";
 import { UserAvatar } from "@/components/common";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function ProfileLink() {
   const pathname = usePathname();
   const { data, isLoading } = useRetrieveProfileQuery();
+  const profileData = useAppSelector((state) => state.auth.profilePicture);
 
   const href = `/dashboard/${data?.profile.username}/`;
   const isActive = pathname === href;
@@ -32,7 +34,7 @@ export default function ProfileLink() {
         <Spinner sm />
       ) : (
         <UserAvatar
-          user={data.profile}
+          user={profileData ? profileData : data.profile}
           className={`h-6 w-6 ${isActive && "border-2 border-white"}`}
         />
       )}
