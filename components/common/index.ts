@@ -3,7 +3,6 @@ export { default as Sidebar } from "./Sidebar";
 export { default as NavLinks } from "./NavLinks";
 export { default as MoreDropdown } from "./MoreDropdown";
 export { default as Logo } from "./Logo";
-export { default as Navbar } from "./Navbar";
 export { default as Footer } from "./Footer";
 export { default as Spinner } from "./Spinner";
 export { default as List } from "./List";
