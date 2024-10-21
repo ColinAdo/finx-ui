@@ -1,45 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   setSocketConnected,
   setSocketDisconnected,
 } from "@/redux/features/authSlice";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
-const useWebSocket = (): WebSocket | null => {
+const WS_URL = "ws://localhost:8000/api/v1/chat/";
+
+const useWebSocketConnection = () => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const [socket, setSocket] = useState<WebSocket | null>(null);
 
-  useEffect(() => {
-    let ws: WebSocket | null = null;
-
-    if (isAuthenticated && !socket) {
-      ws = new WebSocket("ws://localhost:8000/api/v1/chat/");
-      setSocket(ws);
-
-      ws.onopen = () => {
+  const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(
+    isAuthenticated ? WS_URL : null,
+    {
+      onOpen: () => {
         console.log("WebSocket connected");
         dispatch(setSocketConnected());
-      };
-
-      ws.onclose = () => {
+      },
+      onClose: () => {
         console.log("WebSocket disconnected");
-        setSocket(null);
         dispatch(setSocketDisconnected());
-      };
-
-      ws.onerror = (error) => {
-        console.error("WebSocket Error: ", error);
-      };
-
-      return () => {
-        setSocket(null);
-        dispatch(setSocketDisconnected());
-      };
+      },
+      onError: (error) => {
+        console.error("WebSocket Error:", error);
+      },
+      shouldReconnect: () => true,
     }
-  }, [isAuthenticated]);
+  );
 
-  return socket;
+  useEffect(() => {
+    if (!isAuthenticated) {
+      console.log("User is not authenticated. Closing socket.");
+      getWebSocket()?.close();
+    }
+  }, [isAuthenticated, getWebSocket]);
+
+  return { sendMessage, lastMessage, readyState };
 };
 
-export default useWebSocket;
+export default useWebSocketConnection;
