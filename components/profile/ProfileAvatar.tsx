@@ -8,19 +8,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  useRetrieveProfileQuery,
-  useUpdateProfileMutation,
-} from "@/redux/features/profileSlice";
-import { useMount, useWebSocket } from "@/hooks";
+import { useUpdateProfileMutation } from "@/redux/features/profileSlice";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Spinner, UserAvatar } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { CameraIcon } from "lucide-react";
 import { useEdgeStore } from "@/lib/edgestore";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { updateProfilePicture } from "@/redux/features/authSlice";
+import { useWebSocket } from "@/hooks";
 
 interface ProfileData {
   profile: {
@@ -43,11 +40,9 @@ interface ProfilerProps {
   profile: ProfileData;
   children: React.ReactNode;
 }
-const selectProfilePic = (state: any) => state.auth.profilePicture;
 
 export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   const dispatch = useAppDispatch();
-  const { refetch } = useRetrieveProfileQuery();
   const [updateProfile] = useUpdateProfileMutation();
   const { data } = useRetrieveUserQuery();
   const isCurrentUser = data?.id === profile?.profile.id;
@@ -60,32 +55,36 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   );
   const [isUploading, setIsUploading] = useState(false);
   const { edgestore } = useEdgeStore();
-  const mount = useMount();
-  const socket = useWebSocket();
-  const profilePic = useAppSelector(selectProfilePic);
-  console.log("User Object :", profilePic?.username);
+
+  // New WebSocket connection using react-use-websocket
+  const { sendMessage, lastMessage, readyState } = useWebSocket();
+
+  useEffect(() => {
+    if (lastMessage) {
+      try {
+        const data = JSON.parse(lastMessage.data);
+        if (data.type === "profile_picture_updated") {
+          setFileUrl(data.profile_picture);
+          dispatch(updateProfilePicture(data.profile_picture));
+        }
+      } catch (error) {
+        console.error("Error parsing WebSocket message:", error);
+      }
+    } else {
+      console.log("No WebSocket message received yet.");
+    }
+  }, [lastMessage, dispatch]);
 
   if (!profile) return null;
 
-  if (!isCurrentUser && profilePic) {
+  if (!isCurrentUser) {
     return (
-      <UserAvatar user={profilePic} className="w-20 h-20 md:w-36 md:h-36" />
+      <UserAvatar
+        user={profile.profile}
+        className="w-20 h-20 md:w-36 md:h-36"
+      />
     );
   }
-
-  useEffect(() => {
-    if (socket) {
-      socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        console.log("onmessage: ", data);
-        if (data.type === "profile_picture_updated") {
-          toast.success("Profile picture updated in real-time");
-          setFileUrl(data.profile_picture.profile_picture);
-          dispatch(updateProfilePicture(profilePic));
-        }
-      };
-    }
-  }, [socket]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -118,16 +117,14 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
         profile_picture: fileUrl,
       }).unwrap();
 
-      toast.success("Profile updated");
+      toast.success("Profile picture updated");
 
-      if (socket) {
-        socket.send(
-          JSON.stringify({
-            source: "update_profile_picture",
-            profile_picture: fileUrl,
-          })
-        );
-      }
+      sendMessage(
+        JSON.stringify({
+          type: "update_profile_picture",
+          profile_picture: fileUrl,
+        })
+      );
 
       setOpen(false);
       setFile(null);
@@ -150,7 +147,7 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
         {isCurrentUser && (
           <form onSubmit={handleSubmit}>
             <label>
-              <div className="flex flex-col justify-center py-2 items-center cursor-pointer text-sky-500">
+              <div className="flex flex-col disabled:{progress} justify-center py-2 items-center cursor-pointer text-sky-500">
                 <CameraIcon />
               </div>
               <input
