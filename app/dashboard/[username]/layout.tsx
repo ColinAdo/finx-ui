@@ -5,14 +5,17 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { MoreHorizontal, Settings } from "lucide-react";
 import { useRetrieveUsersProfileQuery } from "@/redux/features/profileSlice";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { useCreateConversationMutation } from "@/redux/features/chatSlice";
+import { UserAvatar } from "@/components/common";
+import { ProfileTabs } from "@/components/profile";
+import { useAppSelector } from "@/redux/hooks";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import {
   FollowButton,
   ProfileAvatar,
   ProfileHeader,
 } from "@/components/profile";
-import { UserAvatar } from "@/components/common";
-import { ProfileTabs } from "@/components/profile";
-import { useAppSelector } from "@/redux/hooks";
 
 type Props = {
   params: {
@@ -27,16 +30,33 @@ export default function ProfileLayout({
 }: Props) {
   const { data: profile } = useRetrieveUsersProfileQuery(username);
   const { data } = useRetrieveUserQuery();
+  const [conversation] = useCreateConversationMutation();
   const isCurrentUser = profile?.profile.id === data?.id;
   const profileData = useAppSelector((state) => state.auth.profilePicture);
+  const router = useRouter();
 
   const isFollowing = profile?.following.some(
     (user) => user.user.id === data?.id
   );
 
-  if (!profile) {
+  if (!profile || !data) {
     return;
   }
+
+  const users: any[] = [];
+  const handleCreateConversation = async () => {
+    const users = [profile.profile.id, data.id];
+
+    try {
+      const response = await conversation({ users }).unwrap();
+      const conversationId = response.id;
+      router.push(`/dashboard/messages/${conversationId}`);
+    } catch (error) {
+      toast.error("Error starting conversation");
+      console.log("Error:", error);
+    }
+  };
+
   return (
     <>
       <ProfileHeader username={profile.profile.username} />
@@ -99,6 +119,7 @@ export default function ProfileLayout({
                     variant={"secondary"}
                     className="font-bold"
                     size={"sm"}
+                    onClick={handleCreateConversation}
                   >
                     Message
                   </Button>
