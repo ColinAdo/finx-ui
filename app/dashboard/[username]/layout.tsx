@@ -50,7 +50,7 @@ export default function ProfileLayout({
     try {
       const response = await conversation({ users }).unwrap();
       const conversationId = response.id;
-      router.push(`/dashboard/messages/${conversationId}`);
+      router.push(`/dashboard/inbox/${conversationId}`);
     } catch (error) {
       toast.error("Error starting conversation");
       console.log("Error:", error);
