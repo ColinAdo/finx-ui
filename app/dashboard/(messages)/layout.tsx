@@ -4,29 +4,9 @@ import { UserAvatar } from "@/components/common";
 import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import { useGetConversationsQuery } from "@/redux/features/chatSlice";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
-const tabs = [
-  { title: "Colin", value: "edit-profile", href: `messages` },
-  {
-    title: "Professional account",
-    value: "professional-account",
-    href: "/",
-  },
-  { title: "Notifications", value: "notifications", href: "/" },
-  {
-    title: "Privacy and security",
-    value: "privacy-and-security",
-    href: "/",
-  },
-  { title: "Login activity", value: "login-activity", href: "/" },
-  {
-    title: "Emails from Instagram",
-    value: "emails-from-instagram",
-    href: "/",
-  },
-];
 
 export default function SettingsLayout({
   children,
@@ -34,8 +14,9 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   const { data: profile } = useRetrieveProfileQuery();
+  const { data: conversations } = useGetConversationsQuery();
 
-  if (!profile) {
+  if (!profile || !conversations) {
     return;
   }
   return (
@@ -53,18 +34,30 @@ export default function SettingsLayout({
           <h4 className="font-extrabold text-xl text-white ml-1">Chats</h4>
         </div>
         <TabsList className="flex flex-col items-start justify-start h-full bg-transparent">
-          {tabs.map((tab) => (
-            <TabsTrigger
-              key={tab.value}
-              value={tab.value}
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "lg" }),
-                "data-[state=active]:bg-zinc-100 dark:data-[state=active]:bg-neutral-800 dark:hover:bg-neutral-900 w-full justify-start !px-3"
-              )}
-            >
-              <Link href={`${tab.href}`}>{tab.title}</Link>
-            </TabsTrigger>
-          ))}
+          {conversations.map((conversation) => {
+            const otherUser = conversation.users.find(
+              (user) => user.id !== profile.profile.id
+            );
+
+            return (
+              <TabsTrigger
+                key={conversation.id}
+                value={conversation.id}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "lg" }),
+                  "data-[state=active]:bg-zinc-100 dark:data-[state=active]:bg-neutral-800 dark:hover:bg-neutral-900 w-full justify-start !px-3"
+                )}
+              >
+                {otherUser ? (
+                  <Link href={`/dashboard/inbox/${conversation.id}`}>
+                    {otherUser.username}
+                  </Link>
+                ) : (
+                  "No other user"
+                )}
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
       </Tabs>
 
