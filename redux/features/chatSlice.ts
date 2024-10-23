@@ -14,12 +14,23 @@ interface Conversations {
   id: string;
   users: Users[];
 }
+
+interface MessageType {
+  messages: {
+    id: string;
+    name: string;
+    body: string;
+    send_to: Users;
+    created_by: Users;
+  };
+}
+
 interface ConversationData {
   conversation: {
     id: string;
     users: Users[];
   };
-  messages: Users[];
+  messages: MessageType[];
 }
 
 const chatSlice = apiSlice.injectEndpoints({
