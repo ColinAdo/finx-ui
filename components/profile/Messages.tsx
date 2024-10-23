@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Send } from "lucide-react";
+import Link from "next/link";
 
 interface ProfileData {
   profile: {
@@ -52,11 +53,13 @@ export default function Messages({ recipientProfile }: Props) {
     <div className="flex flex-col h-screen lg:ml-8 lg:-mt-12 -mt-20 ">
       <div className="flex items-center fixed lg:left-auto sm:-left-10 right-11 w-96  lg:w-7/12 justify-between p-4 border-b  bg-white dark:bg-black">
         <div className="flex items-center gap-3">
-          <img
-            src={recipientProfile.profile.profile_picture}
-            alt="Recipient Profile"
-            className="w-10 h-10 rounded-full"
-          />
+          <Link href={`/dashboard/${recipientProfile.profile.username}`}>
+            <img
+              src={recipientProfile.profile.profile_picture}
+              alt="Recipient Profile"
+              className="w-10 h-10 rounded-full"
+            />
+          </Link>
           <span className="font-medium">
             {recipientProfile.profile.username}
           </span>
@@ -88,11 +91,13 @@ export default function Messages({ recipientProfile }: Props) {
             }`}
           >
             {message.sender === "them" && (
-              <img
-                src={recipientProfile.profile.profile_picture}
-                alt="Recipient Profile"
-                className="w-8 h-8 rounded-full mr-3"
-              />
+              <Link href={`/dashboard/${recipientProfile.profile.username}`}>
+                <img
+                  src={recipientProfile.profile.profile_picture}
+                  alt="Recipient Profile"
+                  className="w-8 h-8 rounded-full mr-3"
+                />
+              </Link>
             )}
             <div
               className={`max-w-xs p-3 rounded-lg text-white ${
