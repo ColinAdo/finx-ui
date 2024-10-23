@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { useGetConversationsQuery } from "@/redux/features/chatSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -15,6 +16,7 @@ export default function SettingsLayout({
 }) {
   const { data: profile } = useRetrieveProfileQuery();
   const { data: conversations } = useGetConversationsQuery();
+  const profileData = useAppSelector((state) => state.auth.profilePicture);
 
   if (!profile || !conversations) {
     return;
@@ -27,10 +29,13 @@ export default function SettingsLayout({
         orientation="vertical"
       >
         <div className="flex justify-between mx-4 -mt-6">
-          <UserAvatar
-            user={profile.profile}
-            className="h-10 w-10 hidden lg:block"
-          />
+          <Link href={`/dashboard/${profile.profile.username}`}>
+            <UserAvatar
+              user={profileData ? profileData : profile.profile}
+              className="h-10 w-10 hidden lg:block"
+            />
+          </Link>
+
           <h4 className="font-extrabold text-xl text-white ml-1">Chats</h4>
         </div>
         <TabsList className="flex flex-col items-start justify-start h-full bg-transparent">
