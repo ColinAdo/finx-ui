@@ -1,5 +1,27 @@
 import { apiSlice } from "../services/apiSlice";
 
+interface Users {
+  id: number;
+  email: string;
+  username: string;
+  bio: string;
+  profile_picture: string;
+  website: string;
+  gender: string;
+}
+
+interface Conversations {
+  id: string;
+  users: Users[];
+}
+interface ConversationData {
+  conversation: {
+    id: string;
+    users: Users[];
+  };
+  messages: Users[];
+}
+
 const chatSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createConversation: builder.mutation({
@@ -9,7 +31,21 @@ const chatSlice = apiSlice.injectEndpoints({
         body: { users },
       }),
     }),
+    getConversations: builder.query<Conversations[], void>({
+      query: () => ({
+        url: "/conversations/",
+      }),
+    }),
+    retrieveConversation: builder.query<ConversationData, string>({
+      query: (id) => ({
+        url: `/conversations/${id}/`,
+      }),
+    }),
   }),
 });
 
-export const { useCreateConversationMutation } = chatSlice;
+export const {
+  useCreateConversationMutation,
+  useGetConversationsQuery,
+  useRetrieveConversationQuery,
+} = chatSlice;
