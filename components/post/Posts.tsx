@@ -12,7 +12,6 @@ import { Timestamp, PostActions, Comments } from "@/components/post";
 export default function Post() {
   const { data: user } = useRetrieveProfileQuery();
   const { data: posts } = useGetPostQuery();
-  console.log("Post data:", posts);
 
   if (!posts) {
     return;
