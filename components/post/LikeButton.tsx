@@ -64,9 +64,6 @@ export default function LikeButton({ post }: { post: Post }) {
   const { data } = useRetrieveUserQuery();
 
   const initialLiked = post.likes.some((like) => like.user.id === data?.id);
-  const [liked, setLiked] = useState(
-    localStorage.getItem(`${post.id}-liked`) === "true" ? true : initialLiked
-  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,16 +71,10 @@ export default function LikeButton({ post }: { post: Post }) {
     try {
       await likePost(post.id).unwrap();
       refetch();
-      setLiked((prevLiked) => !prevLiked);
-      localStorage.setItem(`${post.id}-liked`, String(!liked));
     } catch (error) {
       toast.error("Error liking post");
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem(`${post.id}-liked`, String(liked));
-  }, [liked]);
 
   return (
     <div className="flex items-center space-x-2">
@@ -93,8 +84,8 @@ export default function LikeButton({ post }: { post: Post }) {
         <ActionIcons>
           <Heart
             className={cn("h-6 w-6", {
-              "text-red-500 fill-red-500": liked,
-              "dark:text-gray-100 text-gray-950": !liked,
+              "text-red-500 fill-red-500": initialLiked,
+              "dark:text-gray-100 text-gray-950": !initialLiked,
             })}
           />
         </ActionIcons>
