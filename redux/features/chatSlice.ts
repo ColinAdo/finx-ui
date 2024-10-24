@@ -16,13 +16,11 @@ interface Conversations {
 }
 
 interface MessageType {
-  messages: {
-    id: string;
-    name: string;
-    body: string;
-    send_to: Users;
-    created_by: Users;
-  };
+  id: string;
+  name: string;
+  body: string;
+  send_to: Users;
+  created_by: Users;
 }
 
 interface ConversationData {
