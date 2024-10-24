@@ -25,13 +25,17 @@ export default function Page({ params }: Props) {
     otherUser?.username
   );
 
-  if (!userProfile) {
+  if (!userProfile || !conversation || !profile) {
     return;
   }
 
   return (
     <div className="px-12 h-screen lg:w-full">
-      <Messages recipientProfile={userProfile} />
+      <Messages
+        recipientProfile={userProfile}
+        myProfile={profile.profile}
+        conversation={conversation}
+      />
     </div>
   );
 }
