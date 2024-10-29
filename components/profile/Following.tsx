@@ -22,9 +22,9 @@ export default function Following({
 }: Props) {
   const { data: user } = useRetrieveUserQuery();
 
-  if (!user) return null;
   const { data: profile } = useRetrieveUsersProfileQuery(username);
 
+  if (!user) return null;
   const isFollowing = profile?.followers.some(
     (following) => following.user.id === user.id
   );

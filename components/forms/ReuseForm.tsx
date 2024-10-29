@@ -4,10 +4,11 @@ import { Form } from "@/components/ui/form";
 import { ReuseFormFields } from "@/components/forms";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/common";
+import { Control, Path } from "react-hook-form";
 
 interface Config<TSchema extends ZodType> {
-  control: any;
-  name: any;
+  control: Control<z.infer<TSchema>>;
+  name: Path<z.infer<TSchema>>;
   formLabel: string;
   placeholder: string;
   type?: string;

@@ -31,10 +31,9 @@ interface Props {
 }
 
 export default function Comments({ postId, profilePic, className }: Props) {
-  const [progress, setProgress] = useState(0);
+  const [, setProgress] = useState(0);
+  const [comment] = useState("");
   const [file, setFile] = useState<File | null>(null);
-
-  const [comment, setComment] = useState("");
   const [fileUrl, setFileUrl] = useState<{
     url: string;
   }>();

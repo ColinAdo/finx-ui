@@ -6,6 +6,7 @@ import { z } from "zod";
 import { ReuseForm } from "@/components/forms";
 import { usePassowrdReset } from "@/hooks";
 import { PasswordResetSchema } from "@/lib/schemas";
+import { Config } from "@/lib/exports";
 
 export default function PasswordResetForm() {
   const { email, isLoading, onSubmit } = usePassowrdReset();
@@ -16,7 +17,7 @@ export default function PasswordResetForm() {
     },
   });
 
-  const config = [
+  const config: Config<typeof PasswordResetSchema>[] = [
     {
       control: form.control,
       name: "email",

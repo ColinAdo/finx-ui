@@ -6,6 +6,7 @@ import { z } from "zod";
 import { ReuseForm } from "@/components/forms";
 import { useRegister } from "@/hooks";
 import { RegisterSchema } from "@/lib/schemas";
+import { Config } from "@/lib/exports";
 
 export default function RegisterForm() {
   const { username, email, password, re_password, isLoading, onSubmit } =
@@ -20,7 +21,7 @@ export default function RegisterForm() {
     },
   });
 
-  const config = [
+  const config: Config<typeof RegisterSchema>[] = [
     {
       control: form.control,
       name: "username",

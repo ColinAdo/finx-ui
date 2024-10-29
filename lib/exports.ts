@@ -97,3 +97,19 @@ export type ConversationData = {
   };
   messages: MessageType[];
 };
+
+import { Control, Path } from "react-hook-form";
+import { z, ZodType } from "zod";
+
+// Schema type
+export type Config<TSchema extends ZodType> = {
+  control: Control<z.infer<TSchema>>;
+  name: Path<z.infer<TSchema>>;
+  formLabel: string;
+  placeholder: string;
+  type?: string;
+  link?: {
+    linkText: string;
+    linkUrl: string;
+  };
+};

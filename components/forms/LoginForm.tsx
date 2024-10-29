@@ -6,6 +6,7 @@ import { z } from "zod";
 import { ReuseForm } from "@/components/forms";
 import { useLogin } from "@/hooks";
 import { LoginSchema } from "@/lib/schemas";
+import { Config } from "@/lib/exports";
 
 export default function RegisterForm() {
   const { email, password, isLoading, onSubmit } = useLogin();
@@ -17,7 +18,7 @@ export default function RegisterForm() {
     },
   });
 
-  const config = [
+  const config: Config<typeof LoginSchema>[] = [
     {
       control: form.control,
       name: "email",

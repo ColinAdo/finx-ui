@@ -6,6 +6,7 @@ import { z } from "zod";
 import { ReuseForm } from "@/components/forms";
 import { usePassowrdResetConfirm } from "@/hooks";
 import { PasswordResetConfirmSchema } from "@/lib/schemas";
+import { Config } from "@/lib/exports";
 
 interface Props {
   uid: string;
@@ -24,7 +25,7 @@ export default function PasswordResetConfirmForm({ uid, token }: Props) {
     },
   });
 
-  const config = [
+  const config: Config<typeof PasswordResetConfirmSchema>[] = [
     {
       control: form.control,
       name: "new_password",
