@@ -1,10 +1,10 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   setSocketConnected,
   setSocketDisconnected,
 } from "@/redux/features/authSlice";
-import useWebSocket, { ReadyState } from "react-use-websocket";
+import useWebSocket from "react-use-websocket";
 
 const WS_URL = `${process.env.NEXT_PUBLIC_WS_HOST}/api/v1/chat/`;
 
