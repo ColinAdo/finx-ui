@@ -9,6 +9,18 @@ export type User = {
   gender: string;
 };
 
+export type Followers = {
+  id: number;
+  user: User;
+  follows: User;
+};
+
+export type Following = {
+  id: number;
+  user: User;
+  follows: User;
+};
+
 export type Comment = {
   id: number;
   owner: User;
@@ -57,8 +69,8 @@ export type ProfileData = {
     website: string;
     gender: string;
   };
-  following: any[];
-  followers: any[];
+  following: Following[];
+  followers: Followers[];
   posts: Post[];
   following_count: number;
   followers_count: number;

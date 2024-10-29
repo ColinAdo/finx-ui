@@ -10,9 +10,10 @@ import { useMount } from "@/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Follower } from "@/components/profile";
+import { Followers } from "@/lib/exports";
 
 interface Props {
-  followers: any[] | undefined;
+  followers: Followers[] | undefined;
   username: string;
 }
 
