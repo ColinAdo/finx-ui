@@ -64,7 +64,8 @@ export default function Messages({
   const [newMessage, setNewMessage] = useState("");
   const [realtimeMessages, setRealtimeMessages] = useState<MessageType[]>([]);
   const { data: user } = useRetrieveUserQuery();
-  const WS_URL = `ws://localhost:8000/api/v1/chat/${conversation.conversation.id}/`;
+
+  const WS_URL = `${process.env.NEXT_PUBLIC_WS_HOST}/api/v1/chat/${conversation.conversation.id}/`;
 
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
     WS_URL,
@@ -86,13 +87,11 @@ export default function Messages({
       "body" in lastJsonMessage
     ) {
       const message: MessageType = {
-        // messages: {
         id: "",
         body: lastJsonMessage.body as string,
         name: lastJsonMessage.name as string,
         send_to: recipientProfile?.profile,
         created_by: myProfile,
-        // },
       };
 
       setRealtimeMessages((realtimeMessages) => [...realtimeMessages, message]);

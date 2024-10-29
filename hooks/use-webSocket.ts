@@ -6,7 +6,7 @@ import {
 } from "@/redux/features/authSlice";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
-const WS_URL = "ws://localhost:8000/api/v1/chat/";
+const WS_URL = `${process.env.NEXT_PUBLIC_WS_HOST}/api/v1/chat/`;
 
 const useWebSocketConnection = () => {
   const dispatch = useAppDispatch();
