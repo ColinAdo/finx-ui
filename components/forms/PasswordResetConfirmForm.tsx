@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function PasswordResetConfirmForm({ uid, token }: Props) {
-  const { new_password, re_new_password, isLoading, onChange, onSubmit } =
+  const { new_password, re_new_password, isLoading, onSubmit } =
     usePassowrdResetConfirm(uid, token);
 
   const form = useForm<z.infer<typeof PasswordResetConfirmSchema>>({

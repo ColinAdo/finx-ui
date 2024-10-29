@@ -8,7 +8,7 @@ import { useLogin } from "@/hooks";
 import { LoginSchema } from "@/lib/schemas";
 
 export default function RegisterForm() {
-  const { email, password, isLoading, onChange, onSubmit } = useLogin();
+  const { email, password, isLoading, onSubmit } = useLogin();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {

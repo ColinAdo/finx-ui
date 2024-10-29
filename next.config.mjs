@@ -16,6 +16,10 @@ const nextConfig = {
         hostname: "lh3.googleusercontent.com",
       },
       {
+        protocol: "https",
+        hostname: "tailwindui.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "8000",

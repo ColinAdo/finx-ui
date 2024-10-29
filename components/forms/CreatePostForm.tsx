@@ -123,7 +123,7 @@ export default function CreatePostForm() {
           <FormField
             control={form.control}
             name="fileUrl"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormControl>
                   <>
@@ -168,7 +168,7 @@ export default function CreatePostForm() {
           <FormField
             control={form.control}
             name="caption"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel htmlFor="caption">Caption</FormLabel>
                 <FormControl>

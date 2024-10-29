@@ -6,6 +6,7 @@ import { ActionIcons } from "@/components/post";
 import { Bookmark } from "lucide-react";
 import { toast } from "sonner";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { Bookmark as Bk } from "@/lib/exports";
 import {
   useBookmarkPostMutation,
   useGetPostQuery,
@@ -13,7 +14,7 @@ import {
 
 interface Post {
   id: number;
-  bookmarks: any[];
+  bookmarks: Bk[];
   bookmark_count: number;
 }
 

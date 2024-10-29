@@ -2,19 +2,10 @@ import { Avatar } from "@/components/ui/avatar";
 import { Spinner } from "@/components/common";
 import Image from "next/image";
 import { AvatarProps } from "@radix-ui/react-avatar";
-
-interface ProfileData {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
+import { User } from "@/lib/exports";
 
 type Props = Partial<AvatarProps> & {
-  user: ProfileData;
+  user: User;
 };
 
 export default function UserAvatar({ user, ...avatarProps }: Props) {

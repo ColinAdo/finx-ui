@@ -3,12 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { FormDialog } from "@/components/common";
 import { EditPostForm } from "@/components/forms";
-
-interface Post {
-  id: number;
-  fileUrl: string;
-  caption: string;
-}
+import { Post } from "@/lib/exports";
 
 interface Props {
   postId: number;

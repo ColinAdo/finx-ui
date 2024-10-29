@@ -3,60 +3,14 @@
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import { toast } from "sonner";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent } from "react";
 import { ActionIcons } from "@/components/post";
+import { Post } from "@/lib/exports";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import {
   useLikePostMutation,
   useGetPostQuery,
 } from "@/redux/features/postSlice";
-
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface Comment {
-  id: number;
-  owner: User;
-  post: number;
-  comment: string | null;
-  comment_image?: string | null;
-  created_at: Date;
-}
-
-interface Like {
-  id: number;
-  user: User;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Bookmark {
-  id: number;
-  user: User;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Post {
-  id: number;
-  author: User;
-  fileUrl: string;
-  caption: string | null;
-  created_at: Date;
-  comments: Comment[];
-  comments_count: number;
-  likes: Like[];
-  likes_count: number;
-  bookmarks: Bookmark[];
-  bookmark_count: number;
-}
 
 export default function LikeButton({ post }: { post: Post }) {
   const [likePost] = useLikePostMutation();

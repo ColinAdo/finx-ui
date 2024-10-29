@@ -8,15 +8,8 @@ import { useRegister } from "@/hooks";
 import { RegisterSchema } from "@/lib/schemas";
 
 export default function RegisterForm() {
-  const {
-    username,
-    email,
-    password,
-    re_password,
-    isLoading,
-    onChange,
-    onSubmit,
-  } = useRegister();
+  const { username, email, password, re_password, isLoading, onSubmit } =
+    useRegister();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {

@@ -1,21 +1,5 @@
 import { apiSlice } from "../services/apiSlice";
-
-interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
-}
+import { ProfileData } from "@/lib/exports";
 
 const profileSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

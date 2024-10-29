@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function SavedPosts({ params: { username } }: Props) {
-  const { data: posts, isLoading } = useGetBookmarkedPostsQuery(username);
+  const { data: posts } = useGetBookmarkedPostsQuery(username);
 
   if (!posts) {
     return;

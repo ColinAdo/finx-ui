@@ -43,7 +43,6 @@ export default function ProfileLayout({
     return;
   }
 
-  const users: any[] = [];
   const handleCreateConversation = async () => {
     const users = [profile.profile.id, data.id];
 

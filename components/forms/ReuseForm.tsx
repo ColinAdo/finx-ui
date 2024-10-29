@@ -1,4 +1,4 @@
-import { UseFormReturn, Control, Path } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { z, ZodType } from "zod";
 import { Form } from "@/components/ui/form";
 import { ReuseFormFields } from "@/components/forms";
@@ -29,7 +29,6 @@ interface Props<TSchema extends ZodType> {
 export default function MyFormComponent<TSchema extends ZodType>({
   config,
   form,
-  schema,
   btnText,
   isLoading,
   onSubmit,

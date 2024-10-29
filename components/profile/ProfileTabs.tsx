@@ -6,23 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { Bookmark, Clapperboard, Contact, Grid3X3 } from "lucide-react";
-
-interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    profile_picture: string;
-    bio: string;
-    gender: string;
-    website: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
-}
+import { ProfileData } from "@/lib/exports";
 
 const profileTabs = [
   {

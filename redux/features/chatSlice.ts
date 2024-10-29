@@ -1,35 +1,5 @@
 import { apiSlice } from "../services/apiSlice";
-
-interface Users {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface Conversations {
-  id: string;
-  users: Users[];
-}
-
-interface MessageType {
-  id: string;
-  name: string;
-  body: string;
-  send_to: Users;
-  created_by: Users;
-}
-
-interface ConversationData {
-  conversation: {
-    id: string;
-    users: Users[];
-  };
-  messages: MessageType[];
-}
+import { Conversations, ConversationData } from "@/lib/exports";
 
 const chatSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

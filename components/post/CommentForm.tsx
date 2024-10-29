@@ -24,17 +24,6 @@ import { Avatar } from "../ui/avatar";
 import Image from "next/image";
 import { useMount } from "@/hooks";
 
-interface User {
-  id: number;
-  username: string;
-  profile_picture: string;
-}
-
-interface Comment {
-  owner: User;
-  comment: string | null;
-}
-
 interface Props {
   postId: number;
   profilePic: string | undefined;
@@ -159,7 +148,7 @@ export default function Comments({ postId, profilePic, className }: Props) {
             <FormField
               control={form.control}
               name="comment_image"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormControl>
                     <label>

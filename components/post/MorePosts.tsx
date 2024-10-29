@@ -1,18 +1,7 @@
 import Link from "next/link";
 import { PostsGrid } from "@/components/post";
 import { useGetUserPostQuery } from "@/redux/features/postSlice";
-
-interface User {
-  username: string;
-}
-
-interface Post {
-  id: number;
-  author: User;
-  comments_count: number;
-  likes_count: number;
-  bookmark_count: number;
-}
+import { Post } from "@/lib/exports";
 
 interface Props {
   post: Post;

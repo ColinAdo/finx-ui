@@ -5,28 +5,10 @@ import Link from "next/link";
 import Timestamp from "./Timestamp";
 import CommentOptions from "./CommentOptions";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-
-interface ProfileData {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface Comment {
-  id: number;
-  owner: ProfileData;
-  post: number;
-  comment: string | null;
-  comment_image?: string | null;
-  created_at: Date;
-}
+import { Comment as Com } from "@/lib/exports";
 
 interface Props {
-  comment: Comment;
+  comment: Com;
   inputRef?: React.RefObject<HTMLInputElement>;
 }
 

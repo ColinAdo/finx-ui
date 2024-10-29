@@ -5,16 +5,7 @@ import FollowButton from "./FollowButton";
 import { UserAvatar } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useRetrieveUsersProfileQuery } from "@/redux/features/profileSlice";
-
-interface ProfileData {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
+import { User as ProfileData } from "@/lib/exports";
 
 interface Props {
   username: string;

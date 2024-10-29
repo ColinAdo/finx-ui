@@ -28,27 +28,11 @@ import { Spinner, UserAvatar } from "@/components/common";
 import { FormEvent } from "react";
 import { UserSchema } from "@/lib/schemas";
 import { useAppSelector } from "@/redux/hooks";
+import { ProfileData } from "@/lib/exports";
 import {
   useRetrieveProfileQuery,
   useUpdateProfileMutation,
 } from "@/redux/features/profileSlice";
-
-interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
-}
 
 interface Props {
   profile: ProfileData;

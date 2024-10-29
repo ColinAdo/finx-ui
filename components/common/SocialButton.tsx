@@ -3,10 +3,14 @@ import cn from "classnames";
 interface Props {
   provider: "google" | "github";
   children: React.ReactNode;
-  [rest: string]: any;
+  [rest: string]: unknown;
 }
 
-export default function SocialButton({ provider, children, ...rest }: Props) {
+export default function SocialButton({
+  provider: _provider,
+  children,
+  ...rest
+}: Props) {
   const className = cn(
     "flex-1 text-light  dark:text-white rounded-md px-3 py-2 font-medium hover:bg-neutral-400 hover:text-black border border-black dark:border-amber-100"
   );

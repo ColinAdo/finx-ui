@@ -11,58 +11,12 @@ import { Comment, CommentForm } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { Card } from "@/components/ui/card";
+import { Post } from "@/lib/exports";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface PostComment {
-  id: number;
-  owner: User;
-  post: number;
-  comment: string | null;
-  comment_image?: string | null;
-  created_at: Date;
-}
-
-interface Like {
-  id: number;
-  user: User;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Bookmark {
-  id: number;
-  user: User;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Post {
-  id: number;
-  author: User;
-  fileUrl: string;
-  caption: string | null;
-  created_at: Date;
-  comments: PostComment[];
-  comments_count: number;
-  likes: Like[];
-  likes_count: number;
-  bookmarks: Bookmark[];
-  bookmark_count: number;
-}
 
 interface Props {
   postId: number;
@@ -166,8 +120,11 @@ export default function PostView({ postId, post }: Props) {
                   new Date(a.created_at).getTime()
               )
               .slice(0, 1)
-              .map((comment) => (
-                <div className="group p-3 px-3.5  flex items-start space-x-2.5">
+              .map((comment, key) => (
+                <div
+                  key={key}
+                  className="group p-3 px-3.5  flex items-start space-x-2.5"
+                >
                   <Link href={`/dashboard/${comment.owner.username}`}>
                     <UserAvatar user={comment.owner} />
                   </Link>

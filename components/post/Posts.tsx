@@ -19,8 +19,8 @@ export default function Post() {
 
   return (
     <div>
-      {posts?.map((post) => (
-        <div className="flex flex-col space-y-2.5">
+      {posts?.map((post, key) => (
+        <div key={key} className="flex flex-col space-y-2.5">
           <div className="flex items-center justify-between px-3 sm:px-0">
             <div className="flex space-x-3 items-center">
               <Link href={`/dashboard/${post.author.username}`}>

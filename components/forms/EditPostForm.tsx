@@ -11,12 +11,7 @@ import {
 } from "@/redux/features/postSlice";
 import { FormButton, Spinner } from "@/components/common";
 import { useRouter } from "next/navigation";
-
-interface Post {
-  id: number;
-  fileUrl: string;
-  caption: string;
-}
+import { Post } from "@/lib/exports";
 
 interface Props {
   post: Post;

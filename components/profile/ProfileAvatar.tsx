@@ -18,23 +18,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import { useAppDispatch } from "@/redux/hooks";
 import { updateProfilePicture } from "@/redux/features/authSlice";
 import { useWebSocket } from "@/hooks";
-
-interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
-}
+import { ProfileData } from "@/lib/exports";
 
 interface ProfilerProps {
   profile: ProfileData;
@@ -58,6 +42,10 @@ export default function ProfileAvatar({ children, profile }: ProfilerProps) {
 
   // New WebSocket connection using react-use-websocket
   const { sendMessage, lastMessage, readyState } = useWebSocket();
+
+  useEffect(() => {
+    console.log("readyState: ", readyState);
+  }, [readyState]);
 
   useEffect(() => {
     if (lastMessage) {

@@ -3,56 +3,20 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState, useRef } from "react";
 import { Send } from "lucide-react";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import {
+  ProfileData,
+  User,
+  ConversationData,
+  MessageType,
+} from "@/lib/exports";
 import Link from "next/link";
+import Image from "next/image";
 import useWebSocket from "react-use-websocket";
-
-interface ProfileData {
-  profile: {
-    id: number;
-    email: string;
-    username: string;
-    bio: string;
-    profile_picture: string;
-    website: string;
-    gender: string;
-  };
-  following: any[];
-  followers: any[];
-  posts: any[];
-  following_count: number;
-  followers_count: number;
-}
-
-interface Users {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface MessageType {
-  id: string;
-  name: string;
-  body: string;
-  send_to: Users;
-  created_by: Users;
-}
-
-interface ConversationData {
-  conversation: {
-    id: string;
-    users: Users[];
-  };
-  messages: MessageType[];
-}
 
 interface Props {
   recipientProfile: ProfileData;
   conversation: ConversationData;
-  myProfile: Users;
+  myProfile: User;
 }
 
 export default function Messages({
@@ -98,7 +62,7 @@ export default function Messages({
     }
 
     scrollToBottom();
-  }, [lastJsonMessage]);
+  }, [lastJsonMessage, myProfile, recipientProfile?.profile]);
 
   const handleSendMessage = async () => {
     console.log("sendMessage"),
@@ -134,10 +98,12 @@ export default function Messages({
       <div className="flex items-center fixed lg:left-auto sm:-left-10 right-11 w-96  lg:w-7/12 justify-between p-4 border-b  bg-white dark:bg-black">
         <div className="flex items-center gap-3">
           <Link href={`/dashboard/${recipientProfile.profile.username}`}>
-            <img
+            <Image
               src={recipientProfile.profile.profile_picture}
               alt="Recipient Profile"
               className="w-10 h-10 rounded-full"
+              width={40}
+              height={40}
             />
           </Link>
           <span className="font-medium">
@@ -178,10 +144,12 @@ export default function Messages({
             {message.created_by.username ===
               recipientProfile.profile.username && (
               <Link href={`/dashboard/${recipientProfile.profile.username}`}>
-                <img
+                <Image
                   src={recipientProfile.profile.profile_picture}
                   alt="Recipient Profile"
                   className="w-8 h-8 rounded-full mr-3"
+                  width={40}
+                  height={40}
                 />
               </Link>
             )}
@@ -208,10 +176,12 @@ export default function Messages({
           >
             {message.name === recipientProfile.profile.username && (
               <Link href={`/dashboard/${recipientProfile.profile.username}`}>
-                <img
+                <Image
                   src={recipientProfile.profile.profile_picture}
                   alt="Recipient Profile"
                   className="w-8 h-8 rounded-full mr-3"
+                  width={40}
+                  height={40}
                 />
               </Link>
             )}

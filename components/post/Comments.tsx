@@ -22,25 +22,7 @@ import {
 } from "@/redux/features/postSlice";
 import Image from "next/image";
 import { Avatar } from "../ui/avatar";
-
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface Comment {
-  id: number;
-  owner: User;
-  post: number;
-  comment: string | null;
-  comment_image?: string | null;
-  created_at: Date;
-}
+import { Comment } from "@/lib/exports";
 
 interface Props {
   postId: number;
@@ -197,7 +179,7 @@ export default function Comments({
             <FormField
               control={form.control}
               name="comment_image"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormControl>
                     <label>

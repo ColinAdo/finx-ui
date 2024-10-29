@@ -8,7 +8,7 @@ import { usePassowrdReset } from "@/hooks";
 import { PasswordResetSchema } from "@/lib/schemas";
 
 export default function PasswordResetForm() {
-  const { email, isLoading, onChange, onSubmit } = usePassowrdReset();
+  const { email, isLoading, onSubmit } = usePassowrdReset();
   const form = useForm<z.infer<typeof PasswordResetSchema>>({
     resolver: zodResolver(PasswordResetSchema),
     defaultValues: {

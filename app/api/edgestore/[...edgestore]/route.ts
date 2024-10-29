@@ -1,6 +1,5 @@
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreNextHandler } from "@edgestore/server/adapters/next/app";
-import { GitBranch } from "lucide-react";
 
 // instantiate edge store
 const es = initEdgeStore.create();

@@ -9,53 +9,7 @@ import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { MiniPost, Comment, CommentForm } from "@/components/post";
 import { ViewPost } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
-
-interface ProfileData {
-  id: number;
-  email: string;
-  username: string;
-  bio: string;
-  profile_picture: string;
-  website: string;
-  gender: string;
-}
-
-interface PostComment {
-  id: number;
-  owner: ProfileData;
-  post: number;
-  comment: string | null;
-  comment_image?: string | null;
-  created_at: Date;
-}
-
-interface Like {
-  id: number;
-  user: ProfileData;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Bookmark {
-  id: number;
-  user: ProfileData;
-  post: number;
-  created_at: Date | null;
-}
-
-interface Post {
-  id: number;
-  author: ProfileData;
-  fileUrl: string;
-  caption: string | null;
-  created_at: Date;
-  comments: PostComment[];
-  comments_count: number;
-  likes: Like[];
-  likes_count: number;
-  bookmarks: Bookmark[];
-  bookmark_count: number;
-}
+import { Post } from "@/lib/exports";
 
 interface Props {
   postId: number;
@@ -71,8 +25,6 @@ export default function CommentView({ postId, post }: Props) {
   const isPostModal = pathname === `/dashboard/c/${postId}`;
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const username = post?.author.username;
-  const href = `/dashboard/${username}`;
   const mount = useMount();
 
   if (!mount) return null;
