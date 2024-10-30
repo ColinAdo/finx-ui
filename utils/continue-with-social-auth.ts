@@ -13,6 +13,8 @@ export default async function ContinueWithSocialAuth(
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
+    console.log("Fetching URL:", url);
+
     const res = await fetch(url, {
       method: "GET",
       headers: {
