@@ -13,8 +13,6 @@ export default async function ContinueWithSocialAuth(
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
-    console.log("Fetching URL:", url);
-
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -24,6 +22,7 @@ export default async function ContinueWithSocialAuth(
     });
 
     const data = await res.json();
+    console.log("Fetching Data:", data);
     if (res.status === 200 && typeof window !== "undefined") {
       window.location.replace(data.authorization_url);
     } else {
