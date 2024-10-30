@@ -23,6 +23,8 @@ export default async function ContinueWithSocialAuth(
 
     const data = await res.json();
     console.log("Fetching Data:", data);
+    console.log("--------------------------------");
+    console.log("Fetching Url:", url);
     if (res.status === 200 && typeof window !== "undefined") {
       window.location.replace(data.authorization_url);
     } else {
