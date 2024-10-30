@@ -20,18 +20,13 @@ export default async function ContinueWithSocialAuth(
       },
       credentials: "include",
     });
-    console.error("Fetching Url 1:", url);
 
     const data = await res.json();
-    console.error("Fetching Data:", data);
-    console.error("--------------------------------");
-    console.error("Fetching Url 2:", url);
+
     if (res.status === 200 && typeof window !== "undefined") {
       window.location.replace(data.authorization_url);
     } else {
-      toast.error("Something went wrong 1");
-      toast.error("To confirm");
-      console.error("Social auth error:", data);
+      toast.error("Something went wrong");
     }
   } catch (err) {
     toast.error("Something went wrong 2");
