@@ -26,8 +26,12 @@ export default async function ContinueWithSocialAuth(
       window.location.replace(data.authorization_url);
     } else {
       toast.error("Something went wrong");
+      toast.error("To confirm");
+      console.error("Social auth error:", data);
     }
   } catch (err) {
     toast.error("Something went wrong");
+    toast.error("To confirm 2");
+    console.error("Social auth error 2:", err);
   }
 }
