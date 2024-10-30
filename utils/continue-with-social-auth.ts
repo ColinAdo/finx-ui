@@ -20,11 +20,12 @@ export default async function ContinueWithSocialAuth(
       },
       credentials: "include",
     });
+    console.log("Fetching Url 1:", url);
 
     const data = await res.json();
     console.log("Fetching Data:", data);
     console.log("--------------------------------");
-    console.log("Fetching Url:", url);
+    console.log("Fetching Url 2:", url);
     if (res.status === 200 && typeof window !== "undefined") {
       window.location.replace(data.authorization_url);
     } else {
