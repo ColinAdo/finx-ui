@@ -1,9 +1,9 @@
 "use client";
 
-import { UserAvatar } from "@/components/common";
 import Link from "next/link";
 import Timestamp from "./Timestamp";
 import CommentOptions from "./CommentOptions";
+import { UserAvatar } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { Comment as Com } from "@/lib/exports";
 
