@@ -1,8 +1,8 @@
 import { Avatar } from "@/components/ui/avatar";
 import { Spinner } from "@/components/common";
-import Image from "next/image";
 import { AvatarProps } from "@radix-ui/react-avatar";
 import { User } from "@/lib/exports";
+import Image from "next/image";
 
 type Props = Partial<AvatarProps> & {
   user: User;
