@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MessageCircle } from "lucide-react";
 import { Post } from "@/lib/exports";
-import Link from "next/link";
 import {
   LikeButton,
   ActionIcons,
