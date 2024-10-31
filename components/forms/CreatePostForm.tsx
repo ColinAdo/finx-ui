@@ -19,13 +19,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useEdgeStore } from "@/lib/edgestore";
+import { FormButton } from "@/components/common";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   useCreatePostMutation,
   useGetPostQuery,
 } from "@/redux/features/postSlice";
-import { FormButton } from "@/components/common";
-import { useRouter } from "next/navigation";
 
 export default function CreatePostForm() {
   const [createPost] = useCreatePostMutation();
