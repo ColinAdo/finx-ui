@@ -1,7 +1,7 @@
-import { HeartIcon, MessageCircle } from "lucide-react";
-import { Post } from "@/lib/exports";
 import Image from "next/image";
 import Link from "next/link";
+import { HeartIcon, MessageCircle } from "lucide-react";
+import { Post } from "@/lib/exports";
 
 interface Props {
   posts: Post[];
