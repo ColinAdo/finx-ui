@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 import {
   Activity,
   Bookmark,
@@ -17,6 +16,7 @@ import {
   Settings,
   Sun,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
