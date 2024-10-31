@@ -1,21 +1,21 @@
 "use client";
 
+import { SubmitButton } from "@/components/post";
+import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
+import { FormEvent } from "react";
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { Comment } from "@/lib/exports";
+import {
+  useDeleteCommentMutation,
+  useGetPostQuery,
+} from "@/redux/features/postSlice";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SubmitButton } from "@/components/post";
-import { MoreHorizontal } from "lucide-react";
-import { toast } from "sonner";
-import { FormEvent } from "react";
-import {
-  useDeleteCommentMutation,
-  useGetPostQuery,
-} from "@/redux/features/postSlice";
-import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-import { Comment } from "@/lib/exports";
 
 interface Props {
   comment: Comment;
