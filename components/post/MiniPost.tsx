@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Timestamp from "./Timestamp";
 import { PostOptions } from "@/components/post";
 import { UserAvatar } from "@/components/common";
 import { Post } from "@/lib/exports";
-import Timestamp from "./Timestamp";
 
 interface Props {
   post: Post;
