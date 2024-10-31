@@ -1,5 +1,21 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { CommentSchema } from "@/lib/schemas";
+import { ImagePlus } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEdgeStore } from "@/lib/edgestore";
+import { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "sonner";
+import { Avatar } from "../ui/avatar";
+import { Comment } from "@/lib/exports";
+import {
+  useCommentOnPostMutation,
+  useGetPostQuery,
+} from "@/redux/features/postSlice";
 import {
   Form,
   FormControl,
@@ -7,22 +23,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { CommentSchema } from "@/lib/schemas";
-import { ImagePlus } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useEdgeStore } from "@/lib/edgestore";
-import { FormEvent, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { toast } from "sonner";
-import {
-  useCommentOnPostMutation,
-  useGetPostQuery,
-} from "@/redux/features/postSlice";
-import Image from "next/image";
-import { Avatar } from "../ui/avatar";
-import { Comment } from "@/lib/exports";
 
 interface Props {
   postId: number;
