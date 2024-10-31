@@ -1,11 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FormEvent, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { SubmitButton } from "@/components/post";
 import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
 import { toast } from "sonner";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { Post } from "@/lib/exports";
