@@ -1,17 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useState, FormEvent } from "react";
 import { useMount } from "@/hooks";
 import { toast } from "sonner";
-import Image from "next/image";
+import { FormButton, Spinner } from "@/components/common";
+import { useRouter } from "next/navigation";
+import { Post } from "@/lib/exports";
 import {
   useUpdatePostMutation,
   useGetPostQuery,
 } from "@/redux/features/postSlice";
-import { FormButton, Spinner } from "@/components/common";
-import { useRouter } from "next/navigation";
-import { Post } from "@/lib/exports";
 
 interface Props {
   post: Post;
