@@ -3,12 +3,12 @@
 import { SubmitButton } from "@/components/post";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { FormEvent } from "react";
+import { toast } from "sonner";
 import {
   useFollowProfileMutation,
   useRetrieveUsersProfileQuery,
 } from "@/redux/features/profileSlice";
-import { FormEvent } from "react";
-import { toast } from "sonner";
 
 interface Props {
   profileId: number;
