@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { Bookmark, Clapperboard, Contact, Grid3X3 } from "lucide-react";
