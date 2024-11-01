@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Image from "next/image";
+import useWebSocket from "react-use-websocket";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState, useRef } from "react";
@@ -9,9 +12,6 @@ import {
   ConversationData,
   MessageType,
 } from "@/lib/exports";
-import Link from "next/link";
-import Image from "next/image";
-import useWebSocket from "react-use-websocket";
 
 interface Props {
   recipientProfile: ProfileData;
