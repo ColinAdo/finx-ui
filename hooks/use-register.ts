@@ -30,8 +30,9 @@ export default function useRegister() {
         toast.success("Please check your email to activate your account");
         router.push("/auth/login");
       })
-      .catch(() => {
+      .catch((err) => {
         toast.error("Registration failed!");
+        console.log("Registration failed error", err);
       });
   };
   return {
