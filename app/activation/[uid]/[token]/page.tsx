@@ -23,8 +23,9 @@ export default function Page({ params }: Props) {
       .then(() => {
         toast.success("Account activated successfully");
       })
-      .catch(() => {
+      .catch((err) => {
         toast.error("Failed to activate account");
+        console.log("Failed to activate account", err);
       })
       .finally(() => {
         router.push("/auth/login");
