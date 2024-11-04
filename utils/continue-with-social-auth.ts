@@ -13,7 +13,6 @@ export default async function ContinueWithSocialAuth(
         : "http://localhost:3000"
     }/auth/${redirect}`;
 
-    console.error("Social auth URL:", url);
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -31,6 +30,5 @@ export default async function ContinueWithSocialAuth(
     }
   } catch (err) {
     toast.error("Something went wrong 2");
-    console.error("Social auth error 2:", err);
   }
 }
