@@ -28,7 +28,7 @@ export default function Page() {
 
   return (
     <Suspense fallback={<Spinner lg />}>
-      <AuthPage provider="google" authenticate={googleAuthenticate} />
+      <AuthPage provider="google-oauth2" authenticate={googleAuthenticate} />
     </Suspense>
   );
 }
