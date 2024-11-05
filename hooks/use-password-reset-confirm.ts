@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { usePasswordRestConfirmMutation } from "@/redux/features/authApiSlice";
 import { PasswordResetConfirmSchema } from "@/lib/schemas";
