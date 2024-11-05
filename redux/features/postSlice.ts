@@ -1,6 +1,7 @@
 import { apiSlice } from "../services/apiSlice";
 import { Post } from "@/lib/exports";
 
+// post slice
 const postSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createPost: builder.mutation({
