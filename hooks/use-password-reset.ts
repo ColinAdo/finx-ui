@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { usePasswordRestMutation } from "@/redux/features/authApiSlice";
 import { PasswordResetSchema } from "@/lib/schemas";
 import { z } from "zod";
