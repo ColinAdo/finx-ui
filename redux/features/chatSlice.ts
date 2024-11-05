@@ -1,6 +1,7 @@
 import { apiSlice } from "../services/apiSlice";
 import { Conversations, ConversationData } from "@/lib/exports";
 
+// Chat slice
 const chatSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createConversation: builder.mutation({
