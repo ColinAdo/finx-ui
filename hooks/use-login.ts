@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/redux/features/authApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
