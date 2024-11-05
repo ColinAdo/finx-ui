@@ -1,6 +1,7 @@
 import { apiSlice } from "../services/apiSlice";
 import { ProfileData } from "@/lib/exports";
 
+// Profile api slice
 const profileSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     retrieveProfile: builder.query<ProfileData, void>({
