@@ -5,7 +5,6 @@ import { Posts } from "@/components/post";
 import { PostsSkeleton } from "@/components/common/Skeletons";
 
 export default function Page() {
-  console.log("Page component rendered");
   return (
     <main className="flex w-full flex-grow">
       <div className="flex flex-col flex-1 gap-y-8 max-w-lg mx-auto pb-20">
