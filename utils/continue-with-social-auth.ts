@@ -29,6 +29,6 @@ export default async function ContinueWithSocialAuth(
       toast.error("Something went wrong");
     }
   } catch (err) {
-    toast.error("Something went wrong 2");
+    toast.error("Something went wrong");
   }
 }
